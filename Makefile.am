@@ -97,6 +97,8 @@ nvcc_ARCH += -gencode=arch=compute_60,code=sm_60
 #nvcc_ARCH += -gencode=arch=compute_30,code=sm_30
 nvcc_ARCH += -gencode=arch=compute_70,code=sm_70
 nvcc_ARCH += -gencode=arch=compute_75,code=sm_75
+nvcc_ARCH += -gencode=arch=compute_75,code=sm_86
+nvcc_ARCH += -gencode=arch=compute_75,code=sm_89
 
 nvcc_FLAGS = $(nvcc_ARCH) @CUDA_INCLUDES@ -I. @CUDA_CFLAGS@
 nvcc_FLAGS += $(JANSSON_INCLUDES)
