@@ -204,8 +204,8 @@ static __inline__ __host__ __device__ uint2_8 make_uint2_8(
 	return t;
 }
 
-static __inline__ __host__ __device__ ulonglong16 make_ulonglong16(const ulonglong4 &s0, const ulonglong4 &s1,
-																																	 const ulonglong4 &s2, const ulonglong4 &s3, const ulonglong4 &s4, const ulonglong4 &s5, const ulonglong4 &s6, const ulonglong4 &s7)
+static __inline__ __host__ __device__ ulonglong16 make_ulonglong16(const ulonglong4 &s0, const ulonglong4 &s1, const ulonglong4 &s2,
+								 const ulonglong4 &s3, const ulonglong4 &s4, const ulonglong4 &s5, const ulonglong4 &s6, const ulonglong4 &s7)
 {
 	ulonglong16 t; t.s0 = s0; t.s1 = s1; t.s2 = s2; t.s3 = s3; t.s4 = s4; t.s5 = s5; t.s6 = s6; t.s7 = s7;
 	return t;

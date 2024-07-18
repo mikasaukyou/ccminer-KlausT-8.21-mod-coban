@@ -30,6 +30,7 @@ ccminer_SOURCES = elist.h miner.h compat.h \
 			  myriadgroestl.cpp cuda_myriadgroestl.cu \
 			  lyra2/Lyra2.c lyra2/Sponge.c \
 			  lyra2/lyra2REv2.cu lyra2/cuda_lyra2v2.cu \
+			  lyra2/lyra2REvc0ban.cu lyra2/cuda_lyra2vc0ban.cu \
 			  lyra2/lyra2REv3.cu lyra2/cuda_lyra2v3.cu \
 			  lyra2/lyra2RE.cu lyra2/lyra2Z.cu \
 			  lyra2/lyra2Z330.cu lyra2/cuda_lyra2.cu \
@@ -89,12 +90,13 @@ endif
 
 nvcc_ARCH  = -gencode=arch=compute_61,code=sm_61
 nvcc_ARCH += -gencode=arch=compute_60,code=sm_60
-nvcc_ARCH += -gencode=arch=compute_52,code=sm_52
-nvcc_ARCH += -gencode=arch=compute_50,code=sm_50
-nvcc_ARCH += -gencode=arch=compute_37,code=sm_37
-nvcc_ARCH += -gencode=arch=compute_35,code=sm_35
-nvcc_ARCH += -gencode=arch=compute_30,code=sm_30
+#nvcc_ARCH += -gencode=arch=compute_52,code=sm_52
+#nvcc_ARCH += -gencode=arch=compute_50,code=sm_50
+#nvcc_ARCH += -gencode=arch=compute_37,code=sm_37
+#nvcc_ARCH += -gencode=arch=compute_35,code=sm_35
+#nvcc_ARCH += -gencode=arch=compute_30,code=sm_30
 nvcc_ARCH += -gencode=arch=compute_70,code=sm_70
+nvcc_ARCH += -gencode=arch=compute_75,code=sm_75
 
 nvcc_FLAGS = $(nvcc_ARCH) @CUDA_INCLUDES@ -I. @CUDA_CFLAGS@
 nvcc_FLAGS += $(JANSSON_INCLUDES)
