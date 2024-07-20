@@ -36,36 +36,45 @@ __device__ void __syncwarp(uint32_t mask);
 #endif
 
 // Max TPB 1024 (Fermi or later)
+#define TPB86 64
 #define TPB75 64
 #define TPB70 64
 #define TPB61 128
 #define TPB60 64
-#define TPB52 128
-#define TPB50 128
-#define TPB30 192
-#define TPB20 96
+//#define TPB52 128
+//#define TPB50 128
+//#define TPB30 192
+//#define TPB20 96
 
 // Max BPM 32 (Maxwell or later)
 // Max BPM 16 (Kepler)
 // Max BPM 8 (Fermi or older)
+#define BPM86 4
 #define BPM75 4
 #define BPM70 6
 #define BPM61 4
 #define BPM60 6
-#define BPM52 4
-#define BPM50 4
-#define BPM30 2
-#define BPM20 2
+//#define BPM52 4
+//#define BPM50 4
+//#define BPM30 2
+//#define BPM20 2
 
+#define BPM2_86 10
 #define BPM2_75 10
 #define BPM2_70 20
 #define BPM2_61 10
 #define BPM2_60 20
-#define BPM2_52 10
-#define BPM2_50 10
-#define BPM2_30 6
-#define BPM2_20 6
+//#define BPM2_52 10
+//#define BPM2_50 10
+//#define BPM2_30 6
+//#define BPM2_20 6
 
+#if __CUDA_ARCH__ >= 860
+#define TPB TPB86
+#define BPM BPM86
+#define TPB2 TPB
+#define BPM2 BPM2_86
+#define REG_MODE
 #if __CUDA_ARCH__ >= 750
 #define TPB TPB75
 #define BPM BPM75
@@ -90,7 +99,7 @@ __device__ void __syncwarp(uint32_t mask);
 #define TPB2 TPB
 #define BPM2 BPM2_60
 #define REG_MODE
-#elif __CUDA_ARCH__ >= 520
+/* #elif __CUDA_ARCH__ >= 520
 #define TPB TPB52
 #define BPM BPM52
 #define TPB2 TPB
@@ -113,6 +122,7 @@ __device__ void __syncwarp(uint32_t mask);
 #define TPB2 TPB
 #define BPM2 BPM2_20
 #define REG_MODE
+*/
 #endif
 
 __device__ uint2x4 *DState;
@@ -844,13 +854,14 @@ void lyra2vc0ban_cpu_hash_32(int thr_id, uint32_t threads, uint32_t startNounce,
 
 	uint32_t tpb1, tpb2, sm;
 
-	if (device_sm[dev_id] >= 750) { tpb1 = TPB75; sm = 0; }
+        if (device_sm[dev_id] >= 860) { tpb1 = TPB86; sm = TPB86 * 128; }
+	else if (device_sm[dev_id] >= 750) { tpb1 = TPB75; sm = TPB75 * 128; }
 	else if (device_sm[dev_id] >= 700) { tpb1 = TPB70; sm = 0; }
 	else if (device_sm[dev_id] >= 610) { tpb1 = TPB61; sm = TPB61 * 192; }
 	else if (device_sm[dev_id] >= 600) { tpb1 = TPB60; sm = 0; }
-	else if (device_sm[dev_id] >= 520) { tpb1 = TPB52; sm = TPB52 * 192; }
-	else if (device_sm[dev_id] >= 500) { tpb1 = TPB50; sm = TPB50 * 128; }
-	else if (device_sm[dev_id] >= 300) { tpb1 = TPB30; sm = 0; }
+	//else if (device_sm[dev_id] >= 520) { tpb1 = TPB52; sm = TPB52 * 192; }
+	//else if (device_sm[dev_id] >= 500) { tpb1 = TPB50; sm = TPB50 * 128; }
+	//else if (device_sm[dev_id] >= 300) { tpb1 = TPB30; sm = 0; }
 	else { tpb1 = TPB20; sm = TPB50 * 6 * 4; }
 
 	tpb2 = tpb1;
