@@ -858,11 +858,11 @@ void lyra2vc0ban_cpu_hash_32(int thr_id, uint32_t threads, uint32_t startNounce,
 	else if (device_sm[dev_id] >= 750) { tpb1 = TPB75; sm = TPB75 * 128; }
 	else if (device_sm[dev_id] >= 700) { tpb1 = TPB70; sm = 0; }
 	else if (device_sm[dev_id] >= 610) { tpb1 = TPB61; sm = TPB61 * 192; }
-	else if (device_sm[dev_id] >= 600) { tpb1 = TPB60; sm = 0; }
+	else (device_sm[dev_id] >= 600) { tpb1 = TPB60; sm = 0; }
 	//else if (device_sm[dev_id] >= 520) { tpb1 = TPB52; sm = TPB52 * 192; }
 	//else if (device_sm[dev_id] >= 500) { tpb1 = TPB50; sm = TPB50 * 128; }
 	//else if (device_sm[dev_id] >= 300) { tpb1 = TPB30; sm = 0; }
-	else { tpb1 = TPB20; sm = TPB50 * 6 * 4; }
+	//else { tpb1 = TPB20; sm = TPB50 * 6 * 4; }
 
 	tpb2 = tpb1;
 
