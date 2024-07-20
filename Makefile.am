@@ -88,10 +88,10 @@ ccminer_LDFLAGS += -L/usr/local/llvm/lib
 ccminer_LDADD += -lomp
 endif
 
-nvcc_ARCH += -gencode=arch=compute_86,code=sm_86
+nvcc_ARCH  = -gencode=arch=compute_86,code=sm_86
 nvcc_ARCH += -gencode=arch=compute_75,code=sm_75
 nvcc_ARCH += -gencode=arch=compute_70,code=sm_70
-nvcc_ARCH  = -gencode=arch=compute_61,code=sm_61
+nvcc_ARCH += -gencode=arch=compute_61,code=sm_61
 nvcc_ARCH += -gencode=arch=compute_60,code=sm_60
 #nvcc_ARCH += -gencode=arch=compute_52,code=sm_52
 #nvcc_ARCH += -gencode=arch=compute_50,code=sm_50
