@@ -36,9 +36,6 @@ __device__ void __syncwarp(uint32_t mask);
 #endif
 
 // Max TPB 1024 (Fermi or later)
-#define TPB89 128
-#define TPB86 64
-#define TPB75 64
 #define TPB70 64
 #define TPB61 128
 #define TPB60 64
@@ -50,9 +47,6 @@ __device__ void __syncwarp(uint32_t mask);
 // Max BPM 32 (Maxwell or later)
 // Max BPM 16 (Kepler)
 // Max BPM 8 (Fermi or older)
-#define BPM89 4
-#define BPM86 4
-#define BPM75 4
 #define BPM70 6
 #define BPM61 4
 #define BPM60 6
@@ -61,9 +55,6 @@ __device__ void __syncwarp(uint32_t mask);
 #define BPM30 2
 #define BPM20 2
 
-#define BPM2_89 10
-#define BPM2_86 10
-#define BPM2_75 10
 #define BPM2_70 20
 #define BPM2_61 10
 #define BPM2_60 20
@@ -72,24 +63,6 @@ __device__ void __syncwarp(uint32_t mask);
 #define BPM2_30 6
 #define BPM2_20 6
 
-#if __CUDA_ARCH__ >= 890
-#define TPB TPB89
-#define BPM BPM89
-#define TPB2 TPB
-#define BPM2 BPM2_89
-#define REG_MODE
-#if __CUDA_ARCH__ >= 860
-#define TPB TPB86
-#define BPM BPM86
-#define TPB2 TPB
-#define BPM2 BPM2_86
-#define REG_MODE
-#if __CUDA_ARCH__ >= 750
-#define TPB TPB75
-#define BPM BPM75
-#define TPB2 TPB
-#define BPM2 BPM2_75
-#define REG_MODE
 #if __CUDA_ARCH__ >= 700
 #define TPB TPB70
 #define BPM BPM70
@@ -862,9 +835,7 @@ void lyra2v2_cpu_hash_32(int thr_id, uint32_t threads, uint32_t startNounce, uin
 
 	uint32_t tpb1, tpb2, sm;
 
-if (device_sm[dev_id] >= 890) { tpb1 = TPB89; sm = TPB89 * 128; }
-	else if (device_sm[dev_id] >= 860) { tpb1 = TPB86; sm = TPB86 * 128; }
-	else if (device_sm[dev_id] >= 750) { tpb1 = TPB75; sm = TPB75 * 128; }
+	if (device_sm[dev_id] >= 750) { tpb1 = TPB70; sm = 0; }
 	else if (device_sm[dev_id] >= 610) { tpb1 = TPB61; sm = TPB61 * 192; }
 	else if (device_sm[dev_id] >= 600) { tpb1 = TPB60; sm = 0; }
 	else if (device_sm[dev_id] >= 520) { tpb1 = TPB52; sm = TPB52 * 192; }

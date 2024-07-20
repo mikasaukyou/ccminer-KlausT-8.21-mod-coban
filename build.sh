@@ -13,6 +13,5 @@ rm -f config.status
 # CFLAGS="-O2" ./configure
 ./configure.sh
 
-JOBS=$(($(grep cpu.cores /proc/cpuinfo | sort -u | sed 's/[^0-9]//g') + 1))
-make -j${JOBS}
+make -j4
 
