@@ -93,7 +93,8 @@ __device__ void __syncwarp(uint32_t mask);
 #define TPB2 TPB
 #define BPM2 BPM2_61
 #define HALF_MODE
-#elif __CUDA_ARCH__ == 600
+//#elif __CUDA_ARCH__ == 600
+#else
 #define TPB TPB60
 #define BPM BPM60
 #define TPB2 TPB
