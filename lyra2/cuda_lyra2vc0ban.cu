@@ -69,19 +69,19 @@ __device__ void __syncwarp(uint32_t mask);
 //#define BPM2_30 6
 //#define BPM2_20 6
 
-#if __CUDA_ARCH__ == 860
+#if __CUDA_ARCH__ >= 860
 #define TPB TPB86
 #define BPM BPM86
 #define TPB2 TPB
 #define BPM2 BPM2_86
 #define REG_MODE
-#if __CUDA_ARCH__ == 750
+#elif __CUDA_ARCH__ >= 750
 #define TPB TPB75
 #define BPM BPM75
 #define TPB2 TPB
 #define BPM2 BPM2_75
 #define REG_MODE
-#elif __CUDA_ARCH__ == 700
+#elif __CUDA_ARCH__ >= 700
 #define TPB TPB70
 #define BPM BPM70
 #define TPB2 TPB
@@ -854,7 +854,7 @@ void lyra2vc0ban_cpu_hash_32(int thr_id, uint32_t threads, uint32_t startNounce,
 
 	uint32_t tpb1, tpb2, sm;
 
-        if (device_sm[dev_id] == 860) { tpb1 = TPB86; sm = TPB86 * 128; }
+        if (device_sm[dev_id] >= 860) { tpb1 = TPB86; sm = TPB86 * 128; }
 	else if (device_sm[dev_id] >= 750) { tpb1 = TPB75; sm = TPB75 * 128; }
 	else if (device_sm[dev_id] >= 700) { tpb1 = TPB70; sm = 0; }
 	else if (device_sm[dev_id] >= 610) { tpb1 = TPB61; sm = TPB61 * 192; }
